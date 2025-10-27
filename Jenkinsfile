@@ -11,7 +11,8 @@ pipeline {
       post {
         success {
           archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-          junit 'target/surefire-reports/*.xml'
+          // you skipped tests, so don't fail when there are no reports
+          junit testResults: 'target/surefire-reports/*.xml', allowEmptyResults: true
         }
       }
     }
